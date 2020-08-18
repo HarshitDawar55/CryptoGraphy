@@ -5,7 +5,6 @@ def reverse_swap_case(sentence):
     for i in range(len(l)):
         s = ""
         for index, value in enumerate(l[i]):
-            #print(index, value)
             if value.isupper():
                 s += value.lower()
             else:
