@@ -23,7 +23,7 @@ int main(){
 
     string s1;
     s1 = encrypt(str, 5);
-    cout<<"Encrpyted Text: "<<s1<<endl;
+    cout<<"Encrpyted Text: "<<s1<<endl<<"Decrypted Text: "<<encrypt(encrypt(str, 5), 21)<<endl;
 
     return 0;
 }
