@@ -7,7 +7,7 @@ class encrypt_decrypt{
         char []temp = Text.toCharArray();
         for(char character : temp){
             if(Character.isSpaceChar(character)){
-                encrypted_Text.append((char) character);
+                encrypted_Text.append(character);
             }
             else if(Character.isUpperCase(character)){
                 encrypted_Text.append((char) ((((int) character + key - 65) % 26) + 65));
@@ -25,7 +25,7 @@ class encrypt_decrypt{
         char []temp = Text.toCharArray();
         for(char character : temp){
             if(Character.isSpaceChar(character)){
-                decrypted_Text.append((char) character);
+                decrypted_Text.append(character);
             }
             else if(Character.isUpperCase(character)){
                 decrypted_Text.append((char) ((((int) character - key - 65) % 26) + 65));
