@@ -3,38 +3,38 @@ import java.util.Scanner;
 class encrypt_decrypt{
     // Creating a function to encrypt the Text
     static String encrypt(String Text, int key){
-        String encrypted_Text = "";
+        StringBuilder encrypted_Text = new StringBuilder();
         char []temp = Text.toCharArray();
         for(char character : temp){
             if(Character.isSpaceChar(character)){
-                encrypted_Text += (char)character;
+                encrypted_Text.append((char) character);
             }
             else if(Character.isUpperCase(character)){
-                encrypted_Text += (char)((((int)character + key - 65) % 26) + 65);
+                encrypted_Text.append((char) ((((int) character + key - 65) % 26) + 65));
             }
             else {
-                encrypted_Text += (char)((((int)character + key - 97) % 26) + 97);
+                encrypted_Text.append((char) ((((int) character + key - 97) % 26) + 97));
             }
         }
-        return encrypted_Text;
+        return encrypted_Text.toString();
     }
 
     // Creating a function to decrypt the Text
     static String decrypt(String Text, int key){
-        String decrypted_Text = "";
+        StringBuilder decrypted_Text = new StringBuilder();
         char []temp = Text.toCharArray();
         for(char character : temp){
             if(Character.isSpaceChar(character)){
-                decrypted_Text += (char)character;
+                decrypted_Text.append((char) character);
             }
             else if(Character.isUpperCase(character)){
-                decrypted_Text += (char)((((int)character - key - 65) % 26) + 65);
+                decrypted_Text.append((char) ((((int) character - key - 65) % 26) + 65));
             }
             else {
-                decrypted_Text += (char)((((int)character - key - 97) % 26) + 97);
+                decrypted_Text.append((char) ((((int) character - key - 97) % 26) + 97));
             }
         }
-        return decrypted_Text;
+        return decrypted_Text.toString();
     }
 }
 
