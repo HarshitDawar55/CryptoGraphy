@@ -5,7 +5,7 @@
 using namespace std;
 
 string swap_reverse(string Text){
-    string answer = "";
+    // Variable to have the count of spaces
     int count = 0;
     vector<int> space_positions;
 
@@ -25,13 +25,21 @@ string swap_reverse(string Text){
    }
 
     if(count >= 1){
+        // Variable to store the transoformed Text if it contains Spaces
+        string answer = "";
+        // Variable to store the parts of Text seperated by Spaces
         string part_of_Text = "";
+        
         for(int i = count; i >= 0; i--){
-            if(i != 0){
-                part_of_Text = Text.substr(space_positions[i - 1] + 1, Text.length() - 1);
+            if(i == count){
+               part_of_Text = Text.substr(space_positions[i - 1] + 1, Text.length() - 1);
+               answer += part_of_Text + ' ';  
+            }
+            if( (i != 0) && (i != count) ){
+                part_of_Text = Text.substr(space_positions[i - 1] + 1, space_positions[i] - space_positions[i - 1] - 1);
                 answer += part_of_Text + ' ';   
             }
-            else
+            if(i == 0)
             {
                 part_of_Text = Text.substr(0, space_positions[i]);
                 answer += part_of_Text + ' ';
