@@ -1,7 +1,7 @@
 #include<iostream>
 #include<string>
-#include<algorithm>
-#include<vector>
+#include<algorithm> // Will Provide the reverse funciton if needed
+#include<vector>    // WIll Provide the Vector (Dynamic Array)
 using namespace std;
 
 string swap_reverse(string Text){
@@ -25,11 +25,10 @@ string swap_reverse(string Text){
    }
 
     if(count >= 1){
-       // cout<<"HELLO"<<count<<endl;
         string part_of_Text = "";
-        for(int i = count - 1; i >= 0; i--){
+        for(int i = count; i >= 0; i--){
             if(i != 0){
-                part_of_Text = Text.substr(space_positions[i] + 1, Text.length() - 1);
+                part_of_Text = Text.substr(space_positions[i - 1] + 1, Text.length() - 1);
                 answer += part_of_Text + ' ';   
             }
             else
@@ -37,7 +36,6 @@ string swap_reverse(string Text){
                 part_of_Text = Text.substr(0, space_positions[i]);
                 answer += part_of_Text + ' ';
             }
-                        
         }
         return answer;
     }
