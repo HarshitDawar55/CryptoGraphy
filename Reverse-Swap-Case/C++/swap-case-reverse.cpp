@@ -9,6 +9,7 @@ string swap_reverse(string Text){
     int count = 0;
     vector<int> space_positions;
 
+    // Loop to Swap the Case
    for(int i = 0; Text[i] != '\0'; i++){
        if(Text[i] == ' '){
            Text[i] = Text[i];
@@ -30,6 +31,7 @@ string swap_reverse(string Text){
         // Variable to store the parts of Text seperated by Spaces
         string part_of_Text = "";
         
+        //  Loop to extract each word in the sentence & arrange it in the order.
         for(int i = count; i >= 0; i--){
             if(i == count){
                part_of_Text = Text.substr(space_positions[i - 1] + 1, Text.length() - 1);
