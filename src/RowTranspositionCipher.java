@@ -42,6 +42,12 @@ public class RowTranspositionCipher {
         return newText.toString();
     }
 
+    static  String Encryption(String Text, int []Key, int numberOfRows, int numberOfColumns){
+        int [][]encryptionGrid = new int[numberOfRows][numberOfColumns];
+        StringBuilder EncryptedText = new StringBuilder();
+        
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String Key, Text;
@@ -65,6 +71,6 @@ public class RowTranspositionCipher {
         }
 
         System.out.println(Text);
-        System.out.println(Arrays.toString("HARSHI DAWAR".split(" ")));
+        //System.out.println(Arrays.toString("HARSHI DAWAR".split(" ")));
     }
 }
