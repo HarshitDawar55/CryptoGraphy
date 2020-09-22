@@ -95,23 +95,25 @@ public class RowTranspositionCipher {
         return EncryptedText.toString();
     }
 
-    static String Decryption(String Text, int []Key, int numberOfColumns){
+    static String Decryption(String Text, int []Key, int numberOfColumns, int numberOfDummyCharacters){
         int numberOfRows = (int) Math.ceil(Text.length() / Key.length);
         char [][]decryptionGrid = new char[numberOfRows][numberOfColumns];
         StringBuilder DecryptedText = new StringBuilder();
         int position = 0;
 
+        // Creating the grid from the Encrypted Text
         for(int i = 0; i < numberOfColumns; i++){
-            int startingPoint = (Key[i] * (numberOfRows )) - 3;
-            System.out.println(startingPoint);
+            int startingPoint = Key[i] * numberOfRows - 3;
+            //System.out.println(startingPoint);
             for(int j = 0; j < numberOfRows; j++){
                 decryptionGrid[j][i] = Text.charAt(startingPoint);
                 startingPoint += 1;
             }
         }
 
-        System.out.println("Grid Created for the Decryption Process of Cipher Text Message!");
+        System.out.println("\nGrid Created for the Decryption Process of Cipher Text Message!");
 
+        // Displaying the Decryption Grid
         for(int i = 0; i < numberOfRows; i++){
             for(int j = 0; j < numberOfColumns; j++){
                 if(j == numberOfColumns - 1){
@@ -119,6 +121,20 @@ public class RowTranspositionCipher {
                 }
                 else{
                     System.out.print(decryptionGrid[i][j]);
+                }
+            }
+        }
+
+        // Extracting the Text
+        int totalIter = 0;
+        for(int row = 0; row < numberOfRows; row++){
+            for(int column = 0; column < numberOfColumns; column++){
+                DecryptedText.append(
+                        decryptionGrid[row][column]
+                );
+                totalIter += 1;
+                if(totalIter > (Text.length() - numberOfDummyCharacters) + 1){
+                    break;
                 }
             }
         }
@@ -137,10 +153,10 @@ public class RowTranspositionCipher {
         Text = sc.nextLine().toUpperCase().replace(" ", "");
 
         System.out.println("Enter the key");
-        Key = sc.nextLine().toUpperCase();
+        Key = sc.nextLine().toUpperCase().replace(" ", "");
 
         numKey = keyGenerator(Key);
-        System.out.println(Arrays.toString(numKey));
+        System.out.println("Key Generated: " + Arrays.toString(numKey) + "\n");
 
         numberOfRows = Text.length() / numKey.length;
         numberOfColumns = numKey.length;
@@ -149,12 +165,15 @@ public class RowTranspositionCipher {
             Text = calculateDummyCharacters(Text, numKey, numberOfRows, numberOfColumns);
         }
 
-        System.out.println(Text);
-
         EncryptedText = Encryption(Text, numKey, numberOfColumns);
-        System.out.println("Encrypted String: " + EncryptedText);
+        System.out.println("\nEncrypted String: " + EncryptedText + EncryptedText.length());
 
-        Decryption(EncryptedText, numKey, numberOfColumns);
+        System.out.println("\nDecrypted Text: " + Decryption(
+                EncryptedText,
+                numKey,
+                numberOfColumns,
+                (numKey.length - (Text.length() % numKey.length)))
+        );
 
     }
 }
