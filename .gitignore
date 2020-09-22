@@ -1,6 +1,3 @@
-.vscode
-a.out
-password*
 .DS_Store
 *.project
 *.classpath
@@ -13,6 +10,6 @@ moviedataset.zip
 ratings.csv
 tags.csv
 movies.csv
-.idea
-*.iml
-out
+a.out
+*.idea
+*.vscode
