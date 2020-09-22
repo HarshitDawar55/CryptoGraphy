@@ -2,10 +2,19 @@ import java.util.Scanner;
 
 public class gcd {
     static int cal_gcd(int a, int b){
-        if(a != 0){
+        // Wrong approach
+        /*if(a != 0){
+            System.out.println("a = " + a + " b = " + b);
             cal_gcd((b % a), a);
         }
-        return b;
+        return b;*/
+
+        // Right Approach
+        //return a == 0 ? b : (cal_gcd(b % a, a));
+        if (a == 0){
+            return b;
+        }
+        return cal_gcd(b % a, a);
     }
 
     public static void main(String[] args) {
