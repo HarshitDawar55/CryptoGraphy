@@ -37,6 +37,9 @@ public class HillCipher {
         return keyMatrix;
     }
     public static void main(String[] args) {
-        genKeyMatrix();
+        int [][]keyMatrix;
+        keyMatrix = genKeyMatrix();
+
+        
     }
 }
