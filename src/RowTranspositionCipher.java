@@ -69,7 +69,20 @@ public class RowTranspositionCipher {
             }
         }
 
+        int []actualNumberingForEncryption = new int[Key.length];
+        int index = 0;
+        for(int keyword = 1; keyword < Key.length + 1; keyword++){
+            for(int k = 0; k < Key.length; k++){
+                if(keyword == Key[k]){
+                    actualNumberingForEncryption[index] = k;
+                    index += 1;
+                }
+            }
+        }
 
+        for(int i : actualNumberingForEncryption){
+            System.out.print(i);
+        }
 
         return EncryptedText.toString();
     }
@@ -84,7 +97,7 @@ public class RowTranspositionCipher {
         Text = sc.nextLine().toUpperCase().replace(" ", "");
 
         System.out.println("Enter the key");
-        Key = sc.nextLine();
+        Key = sc.nextLine().toUpperCase();
 
         numKey = keyGenerator(Key);
         System.out.println(Arrays.toString(numKey));
