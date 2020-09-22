@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+@SuppressWarnings("IntegerDivisionInFloatingPointContext")
 public class RowTranspositionCipher {
 
     static int []keyGenerator(String Key){
@@ -43,9 +44,32 @@ public class RowTranspositionCipher {
     }
 
     static  String Encryption(String Text, int []Key, int numberOfRows, int numberOfColumns){
-        int [][]encryptionGrid = new int[numberOfRows][numberOfColumns];
+        numberOfRows = (int) Math.ceil(Text.length() / Key.length);
+        char [][]encryptionGrid = new char[numberOfRows][numberOfColumns];
         StringBuilder EncryptedText = new StringBuilder();
+        int position = 0;
+
+        for(int i = 0; i < numberOfRows; i++){
+            for(int j = 0; j < numberOfColumns; j++){
+                encryptionGrid[i][j] = Text.charAt(position);
+                position += 1;
+            }
+        }
+
+        System.out.println("Grid Created for the Text Message!");
         
+        for(int i = 0; i < numberOfRows; i++){
+            for(int j = 0; j < numberOfColumns; j++){
+                if(j == numberOfColumns - 1){
+                    System.out.println(encryptionGrid[i][j]);
+                }
+                else{
+                    System.out.print(encryptionGrid[i][j]);
+                }
+            }
+        }
+
+        return EncryptedText.toString();
     }
 
     public static void main(String[] args) {
@@ -55,7 +79,7 @@ public class RowTranspositionCipher {
         int numberOfRows, numberOfColumns;
 
         System.out.println("Enter the Text");
-        Text = sc.nextLine();
+        Text = sc.nextLine().toUpperCase().replace(" ", "");
 
         System.out.println("Enter the key");
         Key = sc.nextLine();
@@ -71,6 +95,7 @@ public class RowTranspositionCipher {
         }
 
         System.out.println(Text);
+        Encryption(Text, numKey, numberOfRows, numberOfColumns);
         //System.out.println(Arrays.toString("HARSHI DAWAR".split(" ")));
     }
 }
