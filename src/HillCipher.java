@@ -36,10 +36,50 @@ public class HillCipher {
 
         return keyMatrix;
     }
+
+    static char []SubPartEncrypt(int []TextVector, int[][]keyMatrix){
+        int []subTextEncrypt = new int[TextVector.length];
+        for(int i = 0; i < TextVector.length; i++){
+            subTextEncrypt[i] = 0;
+            for(int j = 0; j < TextVector.length; j++){
+                subTextEncrypt[i] += keyMatrix[i][j] * TextVector[j];
+            }
+            subTextEncrypt[i] %= 26;
+        }
+
+        for(int i = 0; i < TextVector.length; i++){
+            System.out.println(subTextEncrypt[i]);
+        }
+
+        char []subString = new char[TextVector.length];
+        for(int i = 0; i < TextVector.length; i++){
+            subString[i] = (char) (subTextEncrypt[i] + 65);
+        }
+
+        return subString;
+    }
+
+    static String EncryptComplete(String Text, int [][]keyMatrix, int vectorLength){
+        StringBuilder EncryptedText = new StringBuilder();
+        return EncryptedText.toString();
+    }
+
     public static void main(String[] args) {
         int [][]keyMatrix;
+        String Text, EncryptedText;
+
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the Text");
+
+        Text = sc.nextLine();
         keyMatrix = genKeyMatrix();
 
-        
+        int MessageVectorLength = keyMatrix.length;
+
+        int []testText = {18, 0, 5};
+        System.out.println(SubPartEncrypt(testText, keyMatrix));
+
+
     }
 }
