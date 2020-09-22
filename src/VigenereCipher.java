@@ -4,17 +4,6 @@ import java.util.Scanner;
 public class VigenereCipher {
 
     static String generateKey(String Text, String Key){
-        String[] temp;
-        temp = Text.split(" ");
-        StringBuilder tempBuilder = new StringBuilder();
-
-        // Constructing String back after removing the spaces
-        for(String word : temp){
-            tempBuilder.append(word);
-        }
-
-        Text = tempBuilder.toString();
-
         int strLen = Text.length(), keyLen = Key.length();
         if(strLen == keyLen){
             return Key;
@@ -30,6 +19,10 @@ public class VigenereCipher {
         return Key;
     }
 
+    static String Encrypt(String Text, String Key){
+
+    }
+
     public static void main(String[] args) {
         // Declaring Scanner for the Input
         Scanner sc = new Scanner(System.in);
@@ -40,6 +33,17 @@ public class VigenereCipher {
 
         System.out.println("Enter the Key for the Encryption");
         Key = sc.nextLine();
+
+        String[] temp;
+        temp = Text.split(" ");
+        StringBuilder tempBuilder = new StringBuilder();
+
+        // Constructing String back after removing the spaces
+        for(String word : temp){
+            tempBuilder.append(word);
+        }
+
+        Text = tempBuilder.toString();
 
         Key = generateKey(Text, Key);
         System.out.println(Key);
