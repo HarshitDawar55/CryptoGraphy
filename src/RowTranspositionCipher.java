@@ -97,7 +97,7 @@ public class RowTranspositionCipher {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String Key, Text;
+        String Key, Text, EncryptedText, DecryptedText;
         int []numKey;
         int numberOfRows, numberOfColumns;
 
@@ -118,7 +118,9 @@ public class RowTranspositionCipher {
         }
 
         System.out.println(Text);
-        System.out.println("Encrypted String: " + Encryption(Text, numKey, numberOfColumns));
+
+        EncryptedText = Encryption(Text, numKey, numberOfColumns);
+        System.out.println("Encrypted String: " + EncryptedText);
 
     }
 }
