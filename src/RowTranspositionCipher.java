@@ -69,6 +69,7 @@ public class RowTranspositionCipher {
             }
         }
 
+        // Generating the actual order in which the columns have to be chosen for the encryption of the Text
         int []actualNumberingForEncryption = new int[Key.length];
         int index = 0;
         for(int keyword = 1; keyword < Key.length + 1; keyword++){
@@ -80,8 +81,15 @@ public class RowTranspositionCipher {
             }
         }
 
-        for(int i : actualNumberingForEncryption){
-            System.out.print(i);
+        // Encrypting the String
+        for(int column = 0; column < numberOfColumns; column++){
+            for(int row = 0; row < numberOfRows; row ++){
+                EncryptedText.append(
+                  encryptionGrid[row][
+                            actualNumberingForEncryption[column]
+                          ]
+                );
+            }
         }
 
         return EncryptedText.toString();
@@ -110,7 +118,7 @@ public class RowTranspositionCipher {
         }
 
         System.out.println(Text);
-        Encryption(Text, numKey, numberOfColumns);
-        //System.out.println(Arrays.toString("HARSHI DAWAR".split(" ")));
+        System.out.println("Encrypted String: " + Encryption(Text, numKey, numberOfColumns));
+
     }
 }
