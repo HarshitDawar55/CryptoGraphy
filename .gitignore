@@ -13,3 +13,5 @@ movies.csv
 a.out
 *.idea
 *.vscode
+*.iml
+out
