@@ -5,8 +5,18 @@ public class RowTranspositionCipher {
 
     static int []keyGenerator(String Key){
         int []numericKey = new int[Key.length()];
-        for(int i = 0; i < Key.length(); i++){
-            numericKey[i] = Key.charAt(i) % 26;
+        String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        int position = 1;
+
+        // Outer Loop to check each character of key in the alphabets & Inner loop to to match the key characters & store them in order
+        for(int i = 0; i < alphabets.length(); i++){
+            for(int j = 0; j < Key.length(); j++) {
+                if(alphabets.charAt(i) == Key.charAt(j)){
+                    numericKey[j] = position;
+                    position += 1;
+                }
+            }
         }
         //Arrays.sort(numericKey);
         return numericKey;
