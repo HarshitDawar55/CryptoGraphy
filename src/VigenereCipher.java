@@ -21,7 +21,6 @@ public class VigenereCipher {
 
     static String Encrypt(String Text, String Key){
         StringBuilder EncryptedText = new StringBuilder();
-        System.out.println(Text);
         for(int i = 0; i < Key.length(); i++){
                 EncryptedText.append(
                         (char)(((Text.charAt(i) + Key.charAt(i)) % 26) + 65)
@@ -63,8 +62,6 @@ public class VigenereCipher {
         Text = tempBuilder.toString();
 
         Key = generateKey(Text, Key);
-        System.out.println(Key);
-
         CipherText = Encrypt(Text, Key);
         System.out.println("Encrypted Text = " + CipherText);
 
