@@ -23,24 +23,27 @@ public class VigenereCipher {
         StringBuilder EncryptedText = new StringBuilder();
         System.out.println(Text);
         for(int i = 0; i < Key.length(); i++){
-            if(Character.isUpperCase(Text.charAt(i))){
                 EncryptedText.append(
                         (char)(((Text.charAt(i) + Key.charAt(i)) % 26) + 65)
                 );
-            }
-            else{
-                EncryptedText.append(
-                        (char)(((Text.charAt(i) + Key.charAt(i)) % 26) + 97)
-                );
-            }
         }
         return EncryptedText.toString();
+    }
+
+    static String Decrypt(String Text, String Key){
+        StringBuilder DecryptedText= new StringBuilder();
+        for(int i = 0; i < Key.length(); i++){
+                DecryptedText.append(
+                        (char)( (((Text.charAt(i) - Key.charAt(i)) + 26) % 26) + 65  )
+                );
+        }
+        return DecryptedText.toString();
     }
 
     public static void main(String[] args) {
         // Declaring Scanner for the Input
         Scanner sc = new Scanner(System.in);
-        String Text, CipherText, Key;
+        String Text, CipherText, Key, DecryptedText;
 
         System.out.println("Enter the Text to be Encrypted");
         Text = sc.nextLine();
@@ -64,5 +67,8 @@ public class VigenereCipher {
 
         CipherText = Encrypt(Text, Key);
         System.out.println("Encrypted Text = " + CipherText);
+
+        DecryptedText = Decrypt(CipherText, Key);
+        System.out.println("Decrypted Text = " + DecryptedText);
     }
 }
