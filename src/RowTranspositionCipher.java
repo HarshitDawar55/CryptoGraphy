@@ -95,6 +95,16 @@ public class RowTranspositionCipher {
         return EncryptedText.toString();
     }
 
+    static String Decryption(String Text, int []Key, int numberOfColumns){
+        int numberOfRows = (int) Math.ceil(Text.length() / Key.length);
+        char [][]decryptionGrid = new char[numberOfRows][numberOfColumns];
+        StringBuilder DecryptedText = new StringBuilder();
+        int position = 0;
+
+        
+    }
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String Key, Text, EncryptedText, DecryptedText;
