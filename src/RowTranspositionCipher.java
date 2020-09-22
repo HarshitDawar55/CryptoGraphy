@@ -43,8 +43,8 @@ public class RowTranspositionCipher {
         return newText.toString();
     }
 
-    static  String Encryption(String Text, int []Key, int numberOfRows, int numberOfColumns){
-        numberOfRows = (int) Math.ceil(Text.length() / Key.length);
+    static  String Encryption(String Text, int[] Key, int numberOfColumns){
+        int numberOfRows = (int) Math.ceil(Text.length() / Key.length);
         char [][]encryptionGrid = new char[numberOfRows][numberOfColumns];
         StringBuilder EncryptedText = new StringBuilder();
         int position = 0;
@@ -57,7 +57,7 @@ public class RowTranspositionCipher {
         }
 
         System.out.println("Grid Created for the Text Message!");
-        
+
         for(int i = 0; i < numberOfRows; i++){
             for(int j = 0; j < numberOfColumns; j++){
                 if(j == numberOfColumns - 1){
@@ -68,6 +68,8 @@ public class RowTranspositionCipher {
                 }
             }
         }
+
+
 
         return EncryptedText.toString();
     }
@@ -95,7 +97,7 @@ public class RowTranspositionCipher {
         }
 
         System.out.println(Text);
-        Encryption(Text, numKey, numberOfRows, numberOfColumns);
+        Encryption(Text, numKey, numberOfColumns);
         //System.out.println(Arrays.toString("HARSHI DAWAR".split(" ")));
     }
 }
