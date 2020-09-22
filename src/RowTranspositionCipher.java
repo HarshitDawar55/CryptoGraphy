@@ -101,7 +101,29 @@ public class RowTranspositionCipher {
         StringBuilder DecryptedText = new StringBuilder();
         int position = 0;
 
-        
+        for(int i = 0; i < numberOfColumns; i++){
+            int startingPoint = (Key[i] * (numberOfRows )) - 3;
+            System.out.println(startingPoint);
+            for(int j = 0; j < numberOfRows; j++){
+                decryptionGrid[j][i] = Text.charAt(startingPoint);
+                startingPoint += 1;
+            }
+        }
+
+        System.out.println("Grid Created for the Decryption Process of Cipher Text Message!");
+
+        for(int i = 0; i < numberOfRows; i++){
+            for(int j = 0; j < numberOfColumns; j++){
+                if(j == numberOfColumns - 1){
+                    System.out.println(decryptionGrid[i][j]);
+                }
+                else{
+                    System.out.print(decryptionGrid[i][j]);
+                }
+            }
+        }
+
+        return DecryptedText.toString();
     }
 
 
@@ -131,6 +153,8 @@ public class RowTranspositionCipher {
 
         EncryptedText = Encryption(Text, numKey, numberOfColumns);
         System.out.println("Encrypted String: " + EncryptedText);
+
+        Decryption(EncryptedText, numKey, numberOfColumns);
 
     }
 }
