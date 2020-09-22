@@ -22,6 +22,12 @@ public class RowTranspositionCipher {
         return numericKey;
     }
 
+    static void calculateMatrixDimensions(String Text, String Key){
+        int numberOfRows = Text.length() / Key.length();
+        int numberOfColumns = Key.length();
+        
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String Key;
