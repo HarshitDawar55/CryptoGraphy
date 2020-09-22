@@ -20,7 +20,21 @@ public class VigenereCipher {
     }
 
     static String Encrypt(String Text, String Key){
-
+        StringBuilder EncryptedText = new StringBuilder();
+        System.out.println(Text);
+        for(int i = 0; i < Key.length(); i++){
+            if(Character.isUpperCase(Text.charAt(i))){
+                EncryptedText.append(
+                        (char)(((Text.charAt(i) + Key.charAt(i)) % 26) + 65)
+                );
+            }
+            else{
+                EncryptedText.append(
+                        (char)(((Text.charAt(i) + Key.charAt(i)) % 26) + 97)
+                );
+            }
+        }
+        return EncryptedText.toString();
     }
 
     public static void main(String[] args) {
@@ -47,5 +61,8 @@ public class VigenereCipher {
 
         Key = generateKey(Text, Key);
         System.out.println(Key);
+
+        CipherText = Encrypt(Text, Key);
+        System.out.println("Encrypted Text = " + CipherText);
     }
 }
