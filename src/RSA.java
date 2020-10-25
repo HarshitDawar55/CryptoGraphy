@@ -31,7 +31,9 @@ public class RSA {
     public static int cal_Euler_Totient_Function(int p, int q){
         return (p - 1) * (q - 1);
     }
-    public static int[] Key_Generator(){
+
+    // Function to create Keys
+    public static ArrayList Key_Generator(){
         Scanner sc = new Scanner(System.in);
         ArrayList Elements = new ArrayList();
 
@@ -54,14 +56,28 @@ public class RSA {
         System.out.println("e: " + e);
 
         while (!((d * e) % phi == 1)){
-            d += 1
+            d += 1;
         }
         System.out.println("d: " + d);
 
+        // Adding Elements to the ArrayList
+        Elements.add(e);
+        Elements.add(d);
+        Elements.add(n);
 
+        /*for(Object i : Elements){
+            System.out.println("i: " + i);
+        }*/
+
+        return Elements;
     }
 
     public static void main(String[] args) {
+        ArrayList<Integer> Elements = new ArrayList<Integer>();
+        Elements = Key_Generator();
 
+        for(int i : Elements){
+            System.out.println(i);
+        }
     }
 }
