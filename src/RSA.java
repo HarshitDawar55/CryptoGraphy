@@ -65,19 +65,21 @@ public class RSA {
         Elements.add(d);
         Elements.add(n);
 
-        /*for(Object i : Elements){
-            System.out.println("i: " + i);
-        }*/
-
         return Elements;
     }
 
     public static void main(String[] args) {
         ArrayList<Integer> Elements = new ArrayList<Integer>();
         Elements = Key_Generator();
+        Scanner sc = new Scanner(System.in);
 
-        for(int i : Elements){
-            System.out.println(i);
-        }
+        System.out.println("Enter the Text! ");
+
+        // Calculating length of the Plain Text
+        int plainText = sc.nextLine().length();
+        int cipherText = (int) Math.pow(plainText, Elements.get(0)) % Elements.get(2);
+        int decryptedText = (int) Math.pow(cipherText, Elements.get(1)) % Elements.get(2);
+
+        System.out.println("PlainText Length: " + plainText + "\n" + "CipherText: " + cipherText + "\n" + "DecryptedText: " + decryptedText);
     }
 }
