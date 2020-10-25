@@ -53,7 +53,12 @@ public class RSA {
 
         System.out.println("e: " + e);
 
-        
+        while (!((d * e) % phi == 1)){
+            d += 1
+        }
+        System.out.println("d: " + d);
+
+
     }
 
     public static void main(String[] args) {
