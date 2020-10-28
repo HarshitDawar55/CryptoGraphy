@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -58,7 +59,7 @@ public class RSA {
         while (!((d * e) % phi == 1)){
             d += 1;
         }
-        System.out.println("d: " + d);
+        System.out.println("d: " + d + "\n" + "n: " + n);
 
         // Adding Elements to the ArrayList
         Elements.add(e);
@@ -77,9 +78,13 @@ public class RSA {
 
         // Calculating length of the Plain Text
         int plainText = sc.nextLine().length();
-        int cipherText = (int) Math.pow(plainText, Elements.get(0)) % Elements.get(2);
-        int decryptedText = (int) Math.pow(cipherText, Elements.get(1)) % Elements.get(2);
+        int cipherText = (int)(Math.pow(plainText, Elements.get(0)) % Elements.get(2));
 
-        System.out.println("PlainText Length: " + plainText + "\n" + "CipherText: " + cipherText + "\n" + "DecryptedText: " + decryptedText);
+        // Using Big Integer because the calculated values can be very large & it will not be possible to store that value.
+        BigInteger Cipher = BigInteger.valueOf(cipherText);
+        BigInteger decryptedText;
+        decryptedText = Cipher.pow(Elements.get(1)).mod(BigInteger.valueOf(Elements.get(2)));
+
+        System.out.println("PlainText Length: " + plainText + "\n" + "CipherText: " + Cipher + "\n" + "DecryptedText: " + decryptedText);
     }
 }
