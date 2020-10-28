@@ -21,6 +21,10 @@ int gcd(int a, int b){
 	return gcd(b % a, a);
 }
 
+int cal_Euler_Totient_Function(int p, int q){
+	return (p - 1) * (q - 1);
+}
+
 
 
 int main(){
