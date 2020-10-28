@@ -1,13 +1,16 @@
 #include<iostream>
 #include<math.h>
 #include<vector>
+#include<cstring>
+#include<boost/multiprecision/cpp_int.hpp>
 using namespace std;
+using namespace boost::multiprecision;
 
 bool primeCheck(int n){
 	if(n < 2){
 		return false;
 	}
-	for(int i = 2; i < sqrt(n) + 1; i++){
+	for(int i = 2; i * i < n + 1; i++){
 		if(n % i == 0){
 			return false;
 		}
@@ -26,7 +29,7 @@ int cal_Euler_Totient_Function(int p, int q){
 	return (p - 1) * (q - 1);
 }
 
-int KeyGenerator(){
+std::vector<int> KeyGenerator(){
 	std::vector<int> vec;
 	int p, q;
 
@@ -42,7 +45,7 @@ int KeyGenerator(){
 
 	int k = 2, v = 1;
 
-	while (!(gcd(k, phi) == 1)){
+	while (!(gcd(k, phi) == 1) && k < phi){
 
 		k += 1;
 	}
@@ -53,20 +56,39 @@ int KeyGenerator(){
 		v += 1;
 	}
 
-	vec[0] = k;
-	vec[1] = v;
-	vec[2] = n;
+	cout<<"v: "<<v<<endl;
 
-	return v;
+	vec.insert(vec.end(), k);
+	vec.insert(vec.end(), v);
+	vec.insert(vec.end(), n);
+	return vec;
 
 }
 
 int main(){
 
-	int plainText, cipherText, decryptedText;
+	int plainText;
+	int128_t cipherText, decryptedText;
+    string p; 
+    
 
 	cout<<"Enter Plain Text to be encrypted!"<<endl;
-	cin>> plainText; 
+	getline(cin, p);
+
+	plainText = p.length();
+
+	std::vector<int> v = KeyGenerator();
+
+	/*for(auto i : v){
+		cout<<i<<" ";
+	}*/
+
+	cipherText = int(pow(plainText, v[0])) % v[2];
+	decryptedText = int128_t(pow(cipherText, v[1])) % v[2];
+
+	cout<<"PlainText: "<<plainText<<endl<<"cipherText: "<<cipherText<<endl<<"decryptedText: "<<decryptedText<<endl;
+	
+
 	return 0;
 }
 
