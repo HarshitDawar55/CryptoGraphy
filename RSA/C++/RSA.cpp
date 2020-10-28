@@ -14,8 +14,18 @@ bool primeCheck(int n){
 	return true;
 }
 
+int gcd(int a, int b){
+	if(a == 0){
+		return b;
+	}
+	return gcd(b % a, a);
+}
+
+
+
 int main(){
 
 	cout<<primeCheck(5);
 	return 0;
 }
+
