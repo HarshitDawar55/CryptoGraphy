@@ -122,8 +122,8 @@ public class SDES {
                 {2, 1, 0, 3}
         };
 
-        System.out.println("Expanded Right Half: " + ExpandedRightHalf);
-        System.out.println("Transformed Numbers: " + TransformedNumbers);
+//        System.out.println("Expanded Right Half: " + ExpandedRightHalf);
+//        System.out.println("Transformed Numbers: " + TransformedNumbers);
 //        System.out.println(String.valueOf(TransformedNumbers.get(0)) + String.valueOf(TransformedNumbers.get(3)));
 //        System.out.println(String.valueOf(TransformedNumbers.get(1)) + String.valueOf(TransformedNumbers.get(2)));
 //        System.out.println(String.valueOf(TransformedNumbers.get(4)) + String.valueOf(TransformedNumbers.get(7)));
@@ -165,6 +165,21 @@ public class SDES {
         return ShiftedText;
     }
 
+    public static void InverseInitialPermutation(List<Integer> Text){
+        StringBuilder FinalEncryptedString = new StringBuilder();
+        // Using the Inverse Initial permutation for the Final String. Ordering: [4, 1, 3, 5, 7, 2, 8, 6]
+        FinalEncryptedString.append(Text.get(3));
+        FinalEncryptedString.append(Text.get(0));
+        FinalEncryptedString.append(Text.get(2));
+        FinalEncryptedString.append(Text.get(4));
+        FinalEncryptedString.append(Text.get(6));
+        FinalEncryptedString.append(Text.get(1));
+        FinalEncryptedString.append(Text.get(7));
+        FinalEncryptedString.append(Text.get(5));
+
+        System.out.println("Final Encrypted String is: " + FinalEncryptedString.toString());
+    }
+
     public static void main(String[] args) {
 //        System.out.println(Integer.parseInt("01", 2) + " " + Integer.parseInt("11", 2));
         Scanner sc = new Scanner(System.in);
@@ -185,21 +200,21 @@ public class SDES {
         }
 
         // Generating P10 key
-        System.out.println(Key);
+        System.out.println("Entered Key: " + Key);
         P10K = P10(Key);
         System.out.println("P10 Key: " + P10K);
 
         // Generating Left & Half Key for First Round
         LeftHalf = LeftShift(P10K, 1).get("LeftHalf");
         RightHalf = LeftShift(P10K, 1).get("RightHalf");
-        System.out.println("LH: " + LeftHalf + " " + "RH: " + RightHalf);
+        System.out.println("Left Half Initial: " + LeftHalf + " " + "Right Half Initial: " + RightHalf);
 
         // Assigning Transformed Key Parts to the Original Key
         P10K.clear();
 //        System.out.println(P10K);
         P10K.addAll(LeftHalf);
         P10K.addAll(RightHalf);
-        System.out.println(P10K);
+        System.out.println("After Shifting P10 Key: " + P10K);
 
         // Obtaining Key1
         Key1 = P8(P10K);
@@ -215,7 +230,7 @@ public class SDES {
 //        System.out.println(P10K);
         P10K.addAll(LeftHalf);
         P10K.addAll(RightHalf);
-        System.out.println(P10K);
+        System.out.println("P10 for Key 2: " + P10K);
 
         // Obtaining Key1
         Key2 = P8(P10K);
@@ -224,7 +239,6 @@ public class SDES {
         // Encryption Process Starts
         IPText = InitialPermutation(PlainText);
         System.out.println("Text after Initial Permutation:" + IPText);
-        System.out.println(InitialPermutation(PlainText));
         for(int i = 0; i < 4; i++){
             LH.add(IPText.get(i));
             RH.add(IPText.get(i + 4));
@@ -234,14 +248,18 @@ public class SDES {
         StringLeftHalf = ExpandedPermutation(RH, LH, Key1).get("LeftHalf");
         StringRightHalf = ExpandedPermutation(RH, LH, Key1).get("RightHalf");
 
-        System.out.println("SLH: " + StringLeftHalf + "\n" + "SRH: " + StringRightHalf);
+//        System.out.println("SLH: " + StringLeftHalf + "\n" + "SRH: " + StringRightHalf);
 
         // Passing one more time for the Final Encryption!
-        FinalLeft = ExpandedPermutation(StringRightHalf, StringLeftHalf, Key2).get("LeftHalf");
-        FinalRight = ExpandedPermutation(StringRightHalf, StringLeftHalf, Key2).get("RightHalf");
+//        System.out.println(ExpandedPermutation(StringRightHalf, StringLeftHalf, Key2));
+        FinalLeft = ExpandedPermutation(StringRightHalf, StringLeftHalf, Key2).get("RightHalf");
+        FinalRight = ExpandedPermutation(StringRightHalf, StringLeftHalf, Key2).get("LeftHalf");
 
         // Building the Final String for the Final Inverse Initial Permutation Step!
         tempList.addAll(FinalLeft);
         tempList.addAll(FinalRight);
+//        System.out.println(tempList);
+        // Final Function Call to get the Encrypted String!
+        InverseInitialPermutation(tempList);
     }
 }
