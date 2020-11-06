@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SDES {
+
     public static List<Integer> P10(ArrayList<Integer> Key){
         List<Integer> P10Key = new ArrayList<Integer>();
 
@@ -48,6 +46,15 @@ public class SDES {
     }
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String tempKey;
 
+
+        System.out.println("Enter the Key for Encryption!");
+        tempKey = sc.nextLine();
+
+        // Converting String Key into List
+        List<Integer> Key = new ArrayList<Integer>(Integer.parseInt(tempKey));
+        
     }
 }
