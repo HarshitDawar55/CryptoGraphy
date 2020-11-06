@@ -64,13 +64,32 @@ public class SDES {
         return P8Key;
     }
 
+    public static String InitialPermutation(String Text){
+        List<Integer> IP = new ArrayList<Integer>();
+
+        // Using the Initial Permutation Combination for the String i.e. [2, 6, 3, 1, 4, 8, 5, 7]
+        IP.add(Text.charAt(1) - '0');
+        IP.add(Text.charAt(5) - '0');
+        IP.add(Text.charAt(2) - '0');
+        IP.add(Text.charAt(0) - '0');
+        IP.add(Text.charAt(3) - '0');
+        IP.add(Text.charAt(7) - '0');
+        IP.add(Text.charAt(4) - '0');
+        IP.add(Text.charAt(6) - '0');
+
+        return IP.toString();
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         List<Integer> Key = new ArrayList<Integer>();
         List<Integer> P10K;
         List<Integer> LeftHalf, RightHalf;
         List<Integer> Key1, Key2;
-        String PlainText;
+        String PlainText = "";
+
+        System.out.println("Enter the Text to be Encrypted!");
+        PlainText = sc.nextLine();
 
         // Taking Key as Input from the User!
         System.out.println("Enter the Key for Encryption!");
@@ -97,7 +116,7 @@ public class SDES {
 
         // Obtaining Key1
         Key1 = P8(P10K);
-        System.out.println("Key1: " + Key1);
+        System.out.println("Key1: " + Key1.toString());
 
         // Generating Left & Right Part for the Key 2!
         LeftHalf = LeftShift(P10K, 2).get("LeftHalf");
@@ -113,12 +132,12 @@ public class SDES {
 
         // Obtaining Key1
         Key2 = P8(P10K);
-        System.out.println("Key2: " + Key2);
+        System.out.println("Key2: " + Key2.toString());
 
         // Encryption Process Starts
-        System.out.println("Enter the Text to be Encrypted!");
-        PlainText = sc.nextLine();
-        
+
+
+        System.out.println(InitialPermutation(PlainText));
 
     }
 }
