@@ -2,7 +2,7 @@ import java.util.*;
 
 public class SDES {
 
-    public static List<Integer> P10(ArrayList<Integer> Key){
+    public static List<Integer> P10(List<Integer> Key){
         List<Integer> P10Key = new ArrayList<Integer>();
 
         // Changing the Key to the specified numbering of P10 block that is [3, 5, 2, 7, 4, 10, 1, 9, 8, 6]
@@ -25,9 +25,10 @@ public class SDES {
         List<Integer> LeftHalf = new ArrayList<Integer>();
         List<Integer> RightHalf = new ArrayList<Integer>();
 
-        // Appending into Left Half & Right Half
-        LeftHalf = Key.subList(0, Key.size() / 2);
-        RightHalf = Key.subList(Key.size() / 2, Key.size());
+        for(int i = 0; i < Key.size() / 2; i ++){
+            LeftHalf.add(Key.get(i));
+            RightHalf.add(Key.get(i + Key.size() / 2));
+        }
 
         // Performing Left Shift
         int temp = LeftHalf.remove(0);
@@ -47,14 +48,17 @@ public class SDES {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String tempKey;
-
+        List<Integer> Key = new ArrayList<Integer>();
+        List<Integer> P10K;
 
         System.out.println("Enter the Key for Encryption!");
-        tempKey = sc.nextLine();
+        while(sc.hasNextInt()){
+            Key.add(sc.nextInt());
+        }
 
-        // Converting String Key into List
-        List<Integer> Key = new ArrayList<Integer>(Integer.parseInt(tempKey));
-        
+        System.out.println(Key);
+        P10K = P10(Key);
+        System.out.println(P10K);
+        System.out.println(LeftShift(P10K));
     }
 }
