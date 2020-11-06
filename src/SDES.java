@@ -124,10 +124,10 @@ public class SDES {
 
         System.out.println("Expanded Right Half: " + ExpandedRightHalf);
         System.out.println("Transformed Numbers: " + TransformedNumbers);
-        System.out.println(String.valueOf(TransformedNumbers.get(0)) + String.valueOf(TransformedNumbers.get(3)));
-        System.out.println(String.valueOf(TransformedNumbers.get(1)) + String.valueOf(TransformedNumbers.get(2)));
-        System.out.println(String.valueOf(TransformedNumbers.get(4)) + String.valueOf(TransformedNumbers.get(7)));
-        System.out.println(String.valueOf(TransformedNumbers.get(5)) + String.valueOf(TransformedNumbers.get(6)));
+//        System.out.println(String.valueOf(TransformedNumbers.get(0)) + String.valueOf(TransformedNumbers.get(3)));
+//        System.out.println(String.valueOf(TransformedNumbers.get(1)) + String.valueOf(TransformedNumbers.get(2)));
+//        System.out.println(String.valueOf(TransformedNumbers.get(4)) + String.valueOf(TransformedNumbers.get(7)));
+//        System.out.println(String.valueOf(TransformedNumbers.get(5)) + String.valueOf(TransformedNumbers.get(6)));
 
         rowS0 = Integer.parseInt(String.valueOf(TransformedNumbers.get(0)) + String.valueOf(TransformedNumbers.get(3)), 2);
         columnS0 = Integer.parseInt(String.valueOf(TransformedNumbers.get(1)) + String.valueOf(TransformedNumbers.get(2)), 2);
@@ -145,8 +145,8 @@ public class SDES {
             OPS1 = "00";
         }
 
-        System.out.println("OPS0 " + OPS0);
-        System.out.println("OPS1 " + OPS1);
+//        System.out.println("OPS0 " + OPS0);
+//        System.out.println("OPS1 " + OPS1);
 
         Temp.add(OPS0.charAt(0) - '0');
         Temp.add(OPS0.charAt(1) - '0');
@@ -230,7 +230,7 @@ public class SDES {
             RH.add(IPText.get(i + 4));
         }
 
-        System.out.println("Left Half of the String: " + LH + "]\n" + "Right Half of the String: [" + RH);
+        System.out.println("Left Half of the String: " + LH + "\n" + "Right Half of the String: " + RH);
 
         System.out.println(ExpandedPermutation(RH, LH, Key1));
 
