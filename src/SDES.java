@@ -80,7 +80,7 @@ public class SDES {
         return IP;
     }
 
-    public static Map<String, List<Integer>> ExpandedPermutation(List<Integer> RightHalf, List<Integer> LeftHalf, List<Integer> Key1){
+    public static Map<String, List<Integer>> ExpandedPermutation(List<Integer> RightHalf, List<Integer> LeftHalf, List<Integer> Key){
         List<Integer> ExpandedRightHalf = new ArrayList<Integer>();
         List<Integer> TransformedNumbers = new ArrayList<>();
         List<Integer> LeftPart = new ArrayList<>();
@@ -104,8 +104,8 @@ public class SDES {
         ExpandedRightHalf.add(RightHalf.get(3));
         ExpandedRightHalf.add(RightHalf.get(0));
 
-        for(int i = 0; i < Key1.size(); i++){
-            TransformedNumbers.add(ExpandedRightHalf.get(i) ^ Key1.get(i));
+        for(int i = 0; i < Key.size(); i++){
+            TransformedNumbers.add(ExpandedRightHalf.get(i) ^ Key.get(i));
         }
 
         // Generating S Boxes
@@ -170,7 +170,7 @@ public class SDES {
         Scanner sc = new Scanner(System.in);
         List<Integer> Key = new ArrayList<Integer>();
         List<Integer> P10K;
-        List<Integer> LeftHalf, RightHalf;
+        List<Integer> LeftHalf, RightHalf, StringLeftHalf, StringRightHalf, FinalLeft, FinalRight, tempList = new ArrayList<>();
         List<Integer> Key1, Key2, RH = new ArrayList<>(), LH = new ArrayList<>(), IPText;
         String PlainText, tempKey;
 
@@ -231,8 +231,17 @@ public class SDES {
         }
 
         System.out.println("Left Half of the String: " + LH + "\n" + "Right Half of the String: " + RH);
+        StringLeftHalf = ExpandedPermutation(RH, LH, Key1).get("LeftHalf");
+        StringRightHalf = ExpandedPermutation(RH, LH, Key1).get("RightHalf");
 
-        System.out.println(ExpandedPermutation(RH, LH, Key1));
+        System.out.println("SLH: " + StringLeftHalf + "\n" + "SRH: " + StringRightHalf);
 
+        // Passing one more time for the Final Encryption!
+        FinalLeft = ExpandedPermutation(StringRightHalf, StringLeftHalf, Key2).get("LeftHalf");
+        FinalRight = ExpandedPermutation(StringRightHalf, StringLeftHalf, Key2).get("RightHalf");
+
+        // Building the Final String for the Final Inverse Initial Permutation Step!
+        tempList.addAll(FinalLeft);
+        tempList.addAll(FinalRight);
     }
 }
