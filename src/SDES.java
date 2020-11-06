@@ -86,7 +86,7 @@ public class SDES {
         List<Integer> P10K;
         List<Integer> LeftHalf, RightHalf;
         List<Integer> Key1, Key2;
-        String PlainText, tempKey;
+        String PlainText, tempKey, LH, RH, IPText;
 
         System.out.println("Enter the Text to be Encrypted!");
         PlainText = sc.nextLine();
@@ -136,9 +136,13 @@ public class SDES {
         System.out.println("Key2: " + Key2.toString());
 
         // Encryption Process Starts
-
-
+        IPText = InitialPermutation(PlainText);
+        System.out.println("Text after Initial Permutation:" + IPText);
         System.out.println(InitialPermutation(PlainText));
+        LH = IPText.substring(0, IPText.length() / 2);
+        RH = IPText.substring(IPText.length() / 2);
 
+        System.out.println("Left Half of the String: " + LH + "]\n" + "Right Half of the String: [" + RH);
+        
     }
 }
