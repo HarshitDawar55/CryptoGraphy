@@ -64,7 +64,7 @@ public class SDES {
         return P8Key;
     }
 
-    public static String InitialPermutation(String Text){
+    public static List<Integer> InitialPermutation(String Text){
         List<Integer> IP = new ArrayList<Integer>();
 
         // Using the Initial Permutation Combination for the String i.e. [2, 6, 3, 1, 4, 8, 5, 7]
@@ -77,18 +77,104 @@ public class SDES {
         IP.add(Text.charAt(4) - '0');
         IP.add(Text.charAt(6) - '0');
 
-        return IP.toString();
+        return IP;
+    }
+
+    public static Map<String, List<Integer>> ExpandedPermutation(List<Integer> RightHalf, List<Integer> LeftHalf, List<Integer> Key1){
+        List<Integer> ExpandedRightHalf = new ArrayList<Integer>();
+        List<Integer> TransformedNumbers = new ArrayList<>();
+        List<Integer> LeftPart = new ArrayList<>();
+        List<Integer> RightPart = new ArrayList<>();
+        List<Integer> Temp = new ArrayList<>();
+        String OPS0;
+        String OPS1;
+        int rowS0;
+        int rowS1;
+        int columnS0;
+        int columnS1;
+
+
+        // Adding the elements in the order [4, 1, 2, 3, 2, 3, 4, 1]
+        ExpandedRightHalf.add(RightHalf.get(3));
+        ExpandedRightHalf.add(RightHalf.get(0));
+        ExpandedRightHalf.add(RightHalf.get(1));
+        ExpandedRightHalf.add(RightHalf.get(2));
+        ExpandedRightHalf.add(RightHalf.get(1));
+        ExpandedRightHalf.add(RightHalf.get(2));
+        ExpandedRightHalf.add(RightHalf.get(3));
+        ExpandedRightHalf.add(RightHalf.get(0));
+
+        for(int i = 0; i < Key1.size(); i++){
+            TransformedNumbers.add(ExpandedRightHalf.get(i) ^ Key1.get(i));
+        }
+
+        // Generating S Boxes
+        int[][] S0 = {
+                {1, 0, 3, 2},
+                {3, 2, 1, 0},
+                {0, 2, 1, 3},
+                {3, 1, 3, 2}
+        };
+        int[][] S1 = {
+                {0, 1, 2, 3},
+                {2, 0, 1, 3},
+                {3, 0, 1, 0},
+                {2, 1, 0, 3}
+        };
+
+        System.out.println("Expanded Right Half: " + ExpandedRightHalf);
+        System.out.println("Transformed Numbers: " + TransformedNumbers);
+        System.out.println(String.valueOf(TransformedNumbers.get(0)) + String.valueOf(TransformedNumbers.get(3)));
+        System.out.println(String.valueOf(TransformedNumbers.get(1)) + String.valueOf(TransformedNumbers.get(2)));
+        System.out.println(String.valueOf(TransformedNumbers.get(4)) + String.valueOf(TransformedNumbers.get(7)));
+        System.out.println(String.valueOf(TransformedNumbers.get(5)) + String.valueOf(TransformedNumbers.get(6)));
+
+        rowS0 = Integer.parseInt(String.valueOf(TransformedNumbers.get(0)) + String.valueOf(TransformedNumbers.get(3)), 2);
+        columnS0 = Integer.parseInt(String.valueOf(TransformedNumbers.get(1)) + String.valueOf(TransformedNumbers.get(2)), 2);
+
+        rowS1 = Integer.parseInt(String.valueOf(TransformedNumbers.get(4)) + String.valueOf(TransformedNumbers.get(7)), 2);
+        columnS1 = Integer.parseInt(String.valueOf(TransformedNumbers.get(5)) + String.valueOf(TransformedNumbers.get(6)), 2);
+
+        OPS0 = Integer.toBinaryString(S0[rowS0][columnS0]);
+        OPS1 = Integer.toBinaryString(S1[rowS1][columnS1]);
+
+        if(OPS0.equals("0")){
+            OPS0 = "00";
+        }
+        if(OPS1.equals("0")){
+            OPS1 = "00";
+        }
+
+        System.out.println("OPS0 " + OPS0);
+        System.out.println("OPS1 " + OPS1);
+
+        Temp.add(OPS0.charAt(0) - '0');
+        Temp.add(OPS0.charAt(1) - '0');
+        Temp.add(OPS1.charAt(0) - '0');
+        Temp.add(OPS1.charAt(1) - '0');
+
+        for(int i = 0; i < 4; i++){
+            RightPart.add(Temp.get(i) ^ (LeftHalf.get(i)));
+            LeftPart.add(RightHalf.get(i));
+        }
+
+        Map<String, List<Integer>> ShiftedText = new HashMap<String, List<Integer>>();
+        ShiftedText.put("LeftHalf", LeftPart);
+        ShiftedText.put("RightHalf", RightPart);
+
+        return ShiftedText;
     }
 
     public static void main(String[] args) {
+//        System.out.println(Integer.parseInt("01", 2) + " " + Integer.parseInt("11", 2));
         Scanner sc = new Scanner(System.in);
         List<Integer> Key = new ArrayList<Integer>();
         List<Integer> P10K;
         List<Integer> LeftHalf, RightHalf;
-        List<Integer> Key1, Key2;
-        String PlainText, tempKey, LH, RH, IPText;
+        List<Integer> Key1, Key2, RH = new ArrayList<>(), LH = new ArrayList<>(), IPText;
+        String PlainText, tempKey;
 
-        System.out.println("Enter the Text to be Encrypted!");
+        System.out.println("Enter the 8 Digit Text to be Encrypted!");
         PlainText = sc.nextLine();
 
         // Taking Key as Input from the User!
@@ -139,10 +225,14 @@ public class SDES {
         IPText = InitialPermutation(PlainText);
         System.out.println("Text after Initial Permutation:" + IPText);
         System.out.println(InitialPermutation(PlainText));
-        LH = IPText.substring(0, IPText.length() / 2);
-        RH = IPText.substring(IPText.length() / 2);
+        for(int i = 0; i < 4; i++){
+            LH.add(IPText.get(i));
+            RH.add(IPText.get(i + 4));
+        }
 
         System.out.println("Left Half of the String: " + LH + "]\n" + "Right Half of the String: [" + RH);
-        
+
+        System.out.println(ExpandedPermutation(RH, LH, Key1));
+
     }
 }
