@@ -70,6 +70,7 @@ public class SDES {
         List<Integer> P10K;
         List<Integer> LeftHalf, RightHalf;
         List<Integer> Key1, Key2;
+        String PlainText;
 
         // Taking Key as Input from the User!
         System.out.println("Enter the Key for Encryption!");
@@ -113,6 +114,11 @@ public class SDES {
         // Obtaining Key1
         Key2 = P8(P10K);
         System.out.println("Key2: " + Key2);
+
+        // Encryption Process Starts
+        System.out.println("Enter the Text to be Encrypted!");
+        PlainText = sc.nextLine();
+        
 
     }
 }
