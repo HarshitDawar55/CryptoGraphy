@@ -20,7 +20,7 @@ public class SDES {
         return P10Key;
     }
 
-    public static Map<String, List<Integer>> LeftShift(List<Integer> Key){
+    public static Map<String, List<Integer>> LeftShift(List<Integer> Key, int numberOfPositions){
         // Declaring two Array Lists for left half & right half of the original Key
         List<Integer> LeftHalf = new ArrayList<Integer>();
         List<Integer> RightHalf = new ArrayList<Integer>();
@@ -30,12 +30,14 @@ public class SDES {
             RightHalf.add(Key.get(i + Key.size() / 2));
         }
 
-        // Performing Left Shift
-        int temp = LeftHalf.remove(0);
-        LeftHalf.add(temp);
+        for(int pos = 1; pos <= numberOfPositions; pos++){
+            // Performing Left Shift
+            int temp = LeftHalf.remove(0);
+            LeftHalf.add(temp);
 
-        temp = RightHalf.remove(0);
-        RightHalf.add(temp);
+            temp = RightHalf.remove(0);
+            RightHalf.add(temp);
+        }
 
         // Initializing the HashMap for the lists
         Map<String, List<Integer>> ShiftedKeys = new HashMap<String, List<Integer>>();
@@ -81,13 +83,13 @@ public class SDES {
         System.out.println("P10 Key: " + P10K);
 
         // Generating Left & Half Key for First Round
-        LeftHalf = LeftShift(P10K).get("LeftHalf");
-        RightHalf = LeftShift(P10K).get("RightHalf");
+        LeftHalf = LeftShift(P10K, 1).get("LeftHalf");
+        RightHalf = LeftShift(P10K, 1).get("RightHalf");
         System.out.println("LH: " + LeftHalf + " " + "RH: " + RightHalf);
 
         // Assigning Transformed Key Parts to the Original Key
         P10K.clear();
-        System.out.println(P10K);
+//        System.out.println(P10K);
         P10K.addAll(LeftHalf);
         P10K.addAll(RightHalf);
         System.out.println(P10K);
@@ -95,5 +97,18 @@ public class SDES {
         // Obtaining Key1
         Key1 = P8(P10K);
         System.out.println("Key1: " + Key1);
+
+        // Generating Left & Right Part for the Key 2!
+        LeftHalf = LeftShift(P10K, 2).get("LeftHalf");
+        RightHalf = LeftShift(P10K, 2).get("RightHalf");
+        System.out.println("LH for Key 2: " + LeftHalf + " " + "RH for Key 2: " + RightHalf);
+
+        // Assigning Transformed Key Parts to the Original Key
+        P10K.clear();
+//        System.out.println(P10K);
+        P10K.addAll(LeftHalf);
+        P10K.addAll(RightHalf);
+        System.out.println(P10K);
+
     }
 }
