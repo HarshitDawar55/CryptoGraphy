@@ -110,5 +110,9 @@ public class SDES {
         P10K.addAll(RightHalf);
         System.out.println(P10K);
 
+        // Obtaining Key1
+        Key2 = P8(P10K);
+        System.out.println("Key2: " + Key2);
+
     }
 }
