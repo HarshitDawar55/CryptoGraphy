@@ -86,15 +86,16 @@ public class SDES {
         List<Integer> P10K;
         List<Integer> LeftHalf, RightHalf;
         List<Integer> Key1, Key2;
-        String PlainText = "";
+        String PlainText, tempKey;
 
         System.out.println("Enter the Text to be Encrypted!");
         PlainText = sc.nextLine();
 
         // Taking Key as Input from the User!
         System.out.println("Enter the Key for Encryption!");
-        while(sc.hasNextInt()){
-            Key.add(sc.nextInt());
+        tempKey = sc.nextLine();
+        for(int i = 0; i < tempKey.length(); i++){
+            Key.add(tempKey.charAt(i) - '0');
         }
 
         // Generating P10 key
