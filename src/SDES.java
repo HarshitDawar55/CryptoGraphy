@@ -67,6 +67,7 @@ public class SDES {
         List<Integer> Key = new ArrayList<Integer>();
         List<Integer> P10K;
         List<Integer> LeftHalf, RightHalf;
+        List<Integer> Key1, Key2;
 
         // Taking Key as Input from the User!
         System.out.println("Enter the Key for Encryption!");
@@ -90,5 +91,9 @@ public class SDES {
         P10K.addAll(LeftHalf);
         P10K.addAll(RightHalf);
         System.out.println(P10K);
+
+        // Obtaining Key1
+        Key1 = P8(P10K);
+        System.out.println("Key1: " + Key1);
     }
 }
