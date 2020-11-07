@@ -35,7 +35,8 @@ public class S_AES {
 
     public static Map<String, List<Integer>> GenComplexKeys(List<Integer> SubKey1, List<Integer> SubKey2, List<Integer> XORList){
         Map<String, List<Integer>> ComplexKeys = new HashMap<>();
-        List<Integer> FirstHalf = new ArrayList<>(), SecondHalf = new ArrayList<>(), temp = new ArrayList<>(), FinalKey1 = new ArrayList<>(), FinalKey2 = new ArrayList<>();
+        List<Integer> FirstHalf = new ArrayList<>(), SecondHalf = new ArrayList<>(), temp = new ArrayList<>();
+        List<Integer> FinalKey1 = new ArrayList<>(), FinalKey2 = new ArrayList<>();
         List<Integer> SecondSubKeyCopy = new ArrayList<>(SubKey2);
 
         // Generating First XOR Part of the FirstHalf of the Complete FirstHalf Key.
