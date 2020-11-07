@@ -132,7 +132,8 @@ public class S_AES {
                 }
                 System.out.println("Text after Round 1 of Encryption: " + PlainText);
 
-//                for(int)
+                // Round 2 (Main Round)
+                
 
             }
         }
