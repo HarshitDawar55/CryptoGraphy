@@ -43,11 +43,14 @@ public class S_AES {
 
         // Rotating Nibbles of the SubKey2
         for(int i = 0; i < 4; i++){
-            temp.add(SubKey2.remove(i));
+            temp.add(SubKey2.remove(0));
         }
         SubKey2.addAll(temp);
         temp.clear();
+//        System.out.println("SubKey2: " + SubKey2 + "\n" + "Temp: " + temp);
+//        System.out.println(S_Box_Substitution + "\n" + S_Box_Substitution.get(temp));
 
+        
         return ComplexKeys;
     }
     public static void main(String[] args) {
@@ -75,6 +78,8 @@ public class S_AES {
 
                 Key1 = ConcatenateSubKeys(W0, W1);
                 System.out.println("Key1: " + Key1);
+
+                GenComplexKeys(W0, W1, Arrays.asList(1, 0, 0, 0, 0, 0, 0, 0));
             }
         }
     }
