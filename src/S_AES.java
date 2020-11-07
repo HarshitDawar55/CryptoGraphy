@@ -12,7 +12,29 @@ public class S_AES {
 
     public static Map<String, List<Integer>> GenComplexKeys(List<Integer> SubKey1, List<Integer> SubKey2, List<Integer> XORList){
         Map<String, List<Integer>> ComplexKeys = new HashMap<>();
+        Map<List<Integer>, List<Integer>> S_Box_Substitution = new HashMap<List<Integer>, List<Integer>>();
         List<Integer> FirstHalf = new ArrayList<>(), SecondHalf = new ArrayList<>(), temp = new ArrayList<>();
+
+        // Initializing HashMap
+        S_Box_Substitution.put(Arrays.asList(0, 0, 0, 0), Arrays.asList(1, 0, 0, 1));
+        S_Box_Substitution.put(Arrays.asList(0, 0, 0, 1), Arrays.asList(0, 1, 0, 0));
+        S_Box_Substitution.put(Arrays.asList(0, 0, 1, 0), Arrays.asList(1, 0, 1, 0));
+        S_Box_Substitution.put(Arrays.asList(0, 0, 1, 1), Arrays.asList(1, 0, 1, 1));
+
+        S_Box_Substitution.put(Arrays.asList(0, 1, 0, 0), Arrays.asList(1, 1, 0, 1));
+        S_Box_Substitution.put(Arrays.asList(0, 1, 0, 1), Arrays.asList(0, 0, 0, 1));
+        S_Box_Substitution.put(Arrays.asList(0, 1, 1, 0), Arrays.asList(1, 0, 0, 0));
+        S_Box_Substitution.put(Arrays.asList(0, 1, 1, 1), Arrays.asList(0, 1, 0, 1));
+
+        S_Box_Substitution.put(Arrays.asList(1, 0, 0, 0), Arrays.asList(0, 1, 1, 0));
+        S_Box_Substitution.put(Arrays.asList(1, 0, 0, 1), Arrays.asList(0, 0, 1, 0));
+        S_Box_Substitution.put(Arrays.asList(1, 0, 1, 0), Arrays.asList(0, 0, 0, 0));
+        S_Box_Substitution.put(Arrays.asList(1, 0, 1, 1), Arrays.asList(0, 0, 1, 1));
+
+        S_Box_Substitution.put(Arrays.asList(1, 1, 0, 0), Arrays.asList(1, 1, 0, 0));
+        S_Box_Substitution.put(Arrays.asList(1, 1, 0, 1), Arrays.asList(1, 1, 1, 0));
+        S_Box_Substitution.put(Arrays.asList(1, 1, 1, 0), Arrays.asList(1, 1, 1, 1));
+        S_Box_Substitution.put(Arrays.asList(1, 1, 1, 1), Arrays.asList(0, 0, 0, 1));
 
         // Generating First XOR Part of the FirstHalf of the Complete FirstHalf Key.
         for(int i = 0; i < 8; i++){
@@ -26,7 +48,7 @@ public class S_AES {
         SubKey2.addAll(temp);
         temp.clear();
 
-
+        return ComplexKeys;
     }
     public static void main(String[] args) {
         String tempkey, tempText;
