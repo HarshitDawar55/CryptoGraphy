@@ -87,7 +87,8 @@ public class S_AES {
     }
     public static void main(String[] args) {
         String tempkey, tempText;
-        List<Integer> W0 = new ArrayList<>(), W1 = new ArrayList<>(), Key1, Key2, Key3;
+        List<Integer> W0 = new ArrayList<>(), W1 = new ArrayList<>(), Key1, Key2, Key3, PlainText = new ArrayList<>();
+        List<Integer> EncryptedText1 = new ArrayList<>();
         Map<String, List<Integer>> Keys, TempKeys;
         Scanner sc = new Scanner(System.in);
 
@@ -124,7 +125,14 @@ public class S_AES {
 
                 // ---------------------------------------- Key Generation Process Complete ----------------------------------------
                 // ---------------------------------------- Starting Encryption Process Now ----------------------------------------
-                
+                // Round 1 (Add Round Key)
+                for(int i = 0; i < 16; i++){
+                    // Creating List for the Plain Text
+                    PlainText.add(Key1.get(i) ^ tempText.charAt(i) - '0');
+                }
+                System.out.println("Text after Round 1 of Encryption: " + PlainText);
+
+//                for(int)
 
             }
         }
