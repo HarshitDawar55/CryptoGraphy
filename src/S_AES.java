@@ -178,7 +178,11 @@ public class S_AES {
 
                 System.out.println("Mix Column Text: " + MixColumnText);
 
-                
+                EncryptedText1.clear();
+                for(int i = 0; i < 16; i++){
+                    EncryptedText1.add(MixColumnText.get(i) ^ Key2.get(i));
+                }
+                System.out.println("Text after round 2: " + EncryptedText1);
             }
         }
     }
