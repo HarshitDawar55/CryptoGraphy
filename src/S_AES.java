@@ -149,12 +149,35 @@ public class S_AES {
                 EncryptedText1.addAll(Nibble4);
                 EncryptedText1.addAll(Nibble3);
                 EncryptedText1.addAll(Nibble2);
-                System.out.println(EncryptedText1);
+                System.out.println("Text after Nibble shuffle: " + EncryptedText1);
                 Nibble2.clear();
                 Nibble3.clear();
                 Nibble4.clear();
 
                 // Mix Column Operation which is the longest one in this complete round
+                List<Integer> MixColumnText = new ArrayList<>();
+                MixColumnText.add(EncryptedText1.get(0) ^ EncryptedText1.get(6));
+                MixColumnText.add(EncryptedText1.get(1) ^ EncryptedText1.get(4) ^ EncryptedText1.get(7));
+                MixColumnText.add(EncryptedText1.get(2) ^ EncryptedText1.get(4) ^ EncryptedText1.get(5));
+                MixColumnText.add(EncryptedText1.get(3) ^ EncryptedText1.get(5));
+
+                MixColumnText.add(EncryptedText1.get(2) ^ EncryptedText1.get(4));
+                MixColumnText.add(EncryptedText1.get(0) ^ EncryptedText1.get(3) ^ EncryptedText1.get(5));
+                MixColumnText.add(EncryptedText1.get(0) ^ EncryptedText1.get(1) ^ EncryptedText1.get(6));
+                MixColumnText.add(EncryptedText1.get(1) ^ EncryptedText1.get(7));
+
+                MixColumnText.add(EncryptedText1.get(8) ^ EncryptedText1.get(14));
+                MixColumnText.add(EncryptedText1.get(9) ^ EncryptedText1.get(12) ^ EncryptedText1.get(15));
+                MixColumnText.add(EncryptedText1.get(10) ^ EncryptedText1.get(12) ^ EncryptedText1.get(13));
+                MixColumnText.add(EncryptedText1.get(11) ^ EncryptedText1.get(13));
+
+                MixColumnText.add(EncryptedText1.get(10) ^ EncryptedText1.get(12));
+                MixColumnText.add(EncryptedText1.get(8) ^ EncryptedText1.get(11) ^ EncryptedText1.get(13));
+                MixColumnText.add(EncryptedText1.get(8) ^ EncryptedText1.get(9) ^ EncryptedText1.get(14));
+                MixColumnText.add(EncryptedText1.get(9) ^ EncryptedText1.get(15));
+
+                System.out.println("Mix Column Text: " + MixColumnText);
+
                 
             }
         }
