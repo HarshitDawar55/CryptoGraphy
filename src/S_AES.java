@@ -193,7 +193,29 @@ public class S_AES {
                 }
 
                 System.out.println("Text after S Box Substitution in round 3: " + MixColumnText);
-                
+
+                // Nibble Substitution
+                for(int i = 0; i < 4; i++){
+                    Nibble2.add(MixColumnText.get(i + 4));
+                    Nibble3.add(MixColumnText.get(i + 8));
+                    Nibble4.add(MixColumnText.get(i + 12));
+                }
+                MixColumnText.subList(4, MixColumnText.size()).clear();
+                MixColumnText.addAll(Nibble4);
+                MixColumnText.addAll(Nibble3);
+                MixColumnText.addAll(Nibble2);
+                System.out.println("Text after Nibble shuffle: " + MixColumnText);
+                Nibble2.clear();
+                Nibble3.clear();
+                Nibble4.clear();
+
+                // Final Step of Final Round (Adding the Last Key)
+                EncryptedText1.clear();
+                for(int i = 0; i < 16; i++){
+                    EncryptedText1.add(MixColumnText.get(i) ^ Key3.get(i));
+                }
+
+                System.out.println("------------------------Final Encrypted Text---------------------\n" + EncryptedText1);
             }
         }
     }
