@@ -122,6 +122,10 @@ public class S_AES {
                 Key3 = ConcatenateSubKeys(TempKeys.get("FirstPart"), TempKeys.get("SecondPart"));
                 System.out.println("Key3: " + Key3);
 
+                // ---------------------------------------- Key Generation Process Complete ----------------------------------------
+                // ---------------------------------------- Starting Encryption Process Now ----------------------------------------
+                
+
             }
         }
     }
