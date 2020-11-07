@@ -150,6 +150,12 @@ public class S_AES {
                 EncryptedText1.addAll(Nibble3);
                 EncryptedText1.addAll(Nibble2);
                 System.out.println(EncryptedText1);
+                Nibble2.clear();
+                Nibble3.clear();
+                Nibble4.clear();
+
+                // Mix Column Operation which is the longest one in this complete round
+                
             }
         }
     }
