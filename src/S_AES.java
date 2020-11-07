@@ -1,23 +1,8 @@
 import java.util.*;
 
 public class S_AES {
-    public static List<Integer> ConcatenateSubKeys(List<Integer> SubKey1, List<Integer> SubKey2){
-        List<Integer> MergedKey = new ArrayList<>();
-
-        MergedKey.addAll(SubKey1);
-        MergedKey.addAll(SubKey2);
-
-        return MergedKey;
-    }
-
-    public static Map<String, List<Integer>> GenComplexKeys(List<Integer> SubKey1, List<Integer> SubKey2, List<Integer> XORList){
-        Map<String, List<Integer>> ComplexKeys = new HashMap<>();
-        Map<List<Integer>, List<Integer>> S_Box_Substitution = new HashMap<List<Integer>, List<Integer>>();
-        List<Integer> FirstHalf = new ArrayList<>(), SecondHalf = new ArrayList<>(), temp = new ArrayList<>(), FinalKey1 = new ArrayList<>(), FinalKey2 = new ArrayList<>();
-        List<Integer> SecondSubKeyCopy = new ArrayList<>();
-        SecondSubKeyCopy.addAll(SubKey2);
-
-        // Initializing HashMap
+    private static final Map<List<Integer>, List<Integer>> S_Box_Substitution = new HashMap<>();
+    static {
         S_Box_Substitution.put(Arrays.asList(0, 0, 0, 0), Arrays.asList(1, 0, 0, 1));
         S_Box_Substitution.put(Arrays.asList(0, 0, 0, 1), Arrays.asList(0, 1, 0, 0));
         S_Box_Substitution.put(Arrays.asList(0, 0, 1, 0), Arrays.asList(1, 0, 1, 0));
@@ -37,6 +22,21 @@ public class S_AES {
         S_Box_Substitution.put(Arrays.asList(1, 1, 0, 1), Arrays.asList(1, 1, 1, 0));
         S_Box_Substitution.put(Arrays.asList(1, 1, 1, 0), Arrays.asList(1, 1, 1, 1));
         S_Box_Substitution.put(Arrays.asList(1, 1, 1, 1), Arrays.asList(0, 0, 0, 1));
+    }
+
+    public static List<Integer> ConcatenateSubKeys(List<Integer> SubKey1, List<Integer> SubKey2){
+        List<Integer> MergedKey = new ArrayList<>();
+
+        MergedKey.addAll(SubKey1);
+        MergedKey.addAll(SubKey2);
+
+        return MergedKey;
+    }
+
+    public static Map<String, List<Integer>> GenComplexKeys(List<Integer> SubKey1, List<Integer> SubKey2, List<Integer> XORList){
+        Map<String, List<Integer>> ComplexKeys = new HashMap<>();
+        List<Integer> FirstHalf = new ArrayList<>(), SecondHalf = new ArrayList<>(), temp = new ArrayList<>(), FinalKey1 = new ArrayList<>(), FinalKey2 = new ArrayList<>();
+        List<Integer> SecondSubKeyCopy = new ArrayList<>(SubKey2);
 
         // Generating First XOR Part of the FirstHalf of the Complete FirstHalf Key.
         for(int i = 0; i < 8; i++){
@@ -49,8 +49,6 @@ public class S_AES {
         }
         SubKey2.addAll(temp);
         temp.clear();
-//        System.out.println("SubKey2: " + SubKey2 + "\n" + "Temp: " + temp);
-//        System.out.println(S_Box_Substitution + "\n" + S_Box_Substitution.get(temp));
 
         // Generating S-Box Substitutions for the SubKeys
         for(int i = 0; i < 4; i++){
@@ -88,7 +86,7 @@ public class S_AES {
     public static void main(String[] args) {
         String tempkey, tempText;
         List<Integer> W0 = new ArrayList<>(), W1 = new ArrayList<>(), Key1, Key2, Key3, PlainText = new ArrayList<>();
-        List<Integer> EncryptedText1 = new ArrayList<>();
+        List<Integer> EncryptedText1 = new ArrayList<>(), temp = new ArrayList<>();
         Map<String, List<Integer>> Keys, TempKeys;
         Scanner sc = new Scanner(System.in);
 
@@ -133,7 +131,9 @@ public class S_AES {
                 System.out.println("Text after Round 1 of Encryption: " + PlainText);
 
                 // Round 2 (Main Round)
-                
+                for(int i = 0; i < 4; i = i + 4){
+                    temp = PlainText.subList(i, i + 4);
+                }
 
             }
         }
