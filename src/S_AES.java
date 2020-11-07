@@ -131,10 +131,25 @@ public class S_AES {
                 System.out.println("Text after Round 1 of Encryption: " + PlainText);
 
                 // Round 2 (Main Round)
-                for(int i = 0; i < 4; i = i + 4){
+                for(int i = 0; i < 16; i = i + 4){
                     temp = PlainText.subList(i, i + 4);
+                    EncryptedText1.addAll(S_Box_Substitution.get(temp));
                 }
 
+                System.out.println("Text after Round 2 S Box Substitution: " + EncryptedText1);
+
+                // Swapping the 2nd & 4th Nibble
+                List<Integer> Nibble2 = new ArrayList<>(), Nibble4 = new ArrayList<>(), Nibble3 = new ArrayList<>();
+                for(int i = 0; i < 4; i++){
+                    Nibble2.add(EncryptedText1.get(i + 4));
+                    Nibble3.add(EncryptedText1.get(i + 8));
+                    Nibble4.add(EncryptedText1.get(i + 12));
+                }
+                EncryptedText1.subList(4, EncryptedText1.size()).clear();
+                EncryptedText1.addAll(Nibble4);
+                EncryptedText1.addAll(Nibble3);
+                EncryptedText1.addAll(Nibble2);
+                System.out.println(EncryptedText1);
             }
         }
     }
