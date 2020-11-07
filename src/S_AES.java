@@ -183,6 +183,17 @@ public class S_AES {
                     EncryptedText1.add(MixColumnText.get(i) ^ Key2.get(i));
                 }
                 System.out.println("Text after round 2: " + EncryptedText1);
+
+                // Round 3 (Final Round)
+                // S Box Substitution
+                MixColumnText.clear();
+                for(int i = 0; i < 16; i = i + 4){
+                    temp = EncryptedText1.subList(i, i + 4);
+                    MixColumnText.addAll(S_Box_Substitution.get(temp));
+                }
+
+                System.out.println("Text after S Box Substitution in round 3: " + MixColumnText);
+                
             }
         }
     }
